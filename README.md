@@ -10,6 +10,10 @@ To build example/st7032.cpp:
 ```sh
 make st7032
 ```
+To build example/bme280.cpp:
+```sh
+make bme280
+```
 --------
 ## Reference
 ```

@@ -6,4 +6,7 @@ install:
 st7032:
 	gcc example/st7032.cpp -o example/st7032.o -lwire
 
-all: install st7032
+bme280:
+	gcc example/bme280.cpp -o example/bme280.o -lwire
+
+all: install st7032 bme280
