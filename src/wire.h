@@ -16,15 +16,9 @@
 
 class wire {
  private:
-  int fd, address;
+  int fd;
+  unsigned short address;
   const char *device;
-
-  struct i2c_smbus_ioctl_data {
-    unsigned char read_write;
-    unsigned char command;
-    unsigned int size;
-    void *data;
-  };
 
  public:
   wire(void);
@@ -32,13 +26,14 @@ class wire {
   int Setup(void);
   int Setup(const char *device, char address);
 
+  int Write(const int data, int length = 1);
   int Write(const void *data, int length = 1);
   /*"length" does not include the number of bytes in the "reg".*/
-  int WriteReg(const char reg, const void *data, int length = 1);
+  int WriteReg(unsigned char reg, const void *data, int length = 1);
 
   int Read(void *data, const int length = 1);
   /*"length" does not include the number of bytes in the "reg".*/
-  int ReadReg(const char reg, void *data, const int length = 1);
+  int ReadReg(unsigned char reg, void *data, const int length = 1);
 
   int Close(void);
 };
