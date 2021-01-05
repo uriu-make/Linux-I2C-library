@@ -36,7 +36,7 @@ int main(void) {
   unsigned char osrs_p = 1;   //Pressure oversampling x 1
   unsigned char osrs_h = 1;   //Humidity oversampling x 1
   unsigned char mode = 3;     //Normal mode
-  unsigned char t_sb = 5;     //Tstandby 1000ms
+  unsigned char t_sb = 0;     //Tstandby 0ms
   unsigned char filter = 2;   //Filter off
   unsigned char spi3w_en = 0; //3-wire SPI Disable
 
@@ -56,7 +56,7 @@ int main(void) {
   bme280.WriteReg(0xF2, &ctrl_hum_reg);
   bme280.WriteReg(0xF4, &ctrl_meas_reg);
   bme280.WriteReg(0xF5, &config_reg);
-  readTrim(); //
+  readTrim();
 
   while (1) {
     sleep(1);

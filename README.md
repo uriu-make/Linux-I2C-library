@@ -38,7 +38,7 @@ Data sending.
 **data** :Pointer to the data to be sent.\
 **length** :Size of the data to be sent (bytes). Default is 1 byte.Can be omitted.
 ```
-int wire::WriteReg(const char reg, const void *data, int length = 1, bool re = false);
+int wire::WriteReg(const char reg, const void *data, int length = 1, bool resterted = false);
 ```
 Send data by specifying a register.
 
@@ -55,7 +55,7 @@ Read out the data.
 **data** :A pointer to a variable that stores the data to read.\
 **length** :Size of the data to be read (bytes). Default is 1 byte.Can be omitted.
 ```
-int wire::ReadReg(const char reg, void *data, const int length = 1, bool re = false);
+int wire::ReadReg(const char reg, void *data, const int length = 1, bool resterted = false);
 ```
 Read data by specifying a register.
 
