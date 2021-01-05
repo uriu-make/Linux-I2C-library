@@ -8,7 +8,6 @@ $ ./st7032.o "string1" "string2"
 Type at the terminal.
 */
 
-#include <math.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
