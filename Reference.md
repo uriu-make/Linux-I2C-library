@@ -21,7 +21,7 @@ Data sending.
 **data** :Pointer to the data to be sent.\
 **length** :Size of the data to be sent (bytes). Default is 1 byte.Can be omitted.
 ```
-int wire::WriteReg(const char reg, const void *data, int length = 1, bool resterted = false);
+int wire::WriteReg(const char reg, const void *data, int length = 1, bool repeated = false);
 ```
 Send data by specifying a register.
 
@@ -29,7 +29,7 @@ Send data by specifying a register.
 **data** :Pointer to the data to be sent.\
 **length** :Size of the data to be sent (bytes). Default is 1 byte.Can be omitted.\
 "length" does not include the number of bytes in the "reg"\
-**resterted** :Select whether to perform repeated start condition.  Valid with true.
+**repeated** :Select whether to perform repeated start condition.  Valid with true.
 ```
 int wire::Read(void *data, const int length = 1);
 ```
@@ -38,7 +38,7 @@ Read out the data.
 **data** :A pointer to a variable that stores the data to read.\
 **length** :Size of the data to be read (bytes). Default is 1 byte.Can be omitted.
 ```
-int wire::ReadReg(const char reg, void *data, const int length = 1, bool resterted = false);
+int wire::ReadReg(const char reg, void *data, const int length = 1, bool repeated = false);
 ```
 Read data by specifying a register.
 
@@ -46,7 +46,7 @@ Read data by specifying a register.
 **data** :A pointer to a variable that stores the data to read.\
 **length** :Size of the data to be read (bytes). Default is 1 byte.Can be omitted.\
 "length" does not include the number of bytes in the "reg"\
-**resterted** :Select whether to perform repeated start condition.  Valid with true.
+**repeated** :Select whether to perform repeated start condition.  Valid with true.
 ```
 int wire::Close(void);
 ```

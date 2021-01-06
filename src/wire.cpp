@@ -33,8 +33,8 @@ int wire::Write(const void *data, int length) {
   return write(fd, data, length);
 }
 
-int wire::WriteReg(unsigned char reg, const void *data, int length, bool resterted) {
-  if (resterted == true) {
+int wire::WriteReg(unsigned char reg, const void *data, int length, bool repeated) {
+  if (repeated == true) {
     struct i2c_msg args[2];
     struct i2c_rdwr_ioctl_data msgset;
     args[0].addr = address;
@@ -58,8 +58,8 @@ int wire::Read(void *data, int length) {
   return read(fd, data, length);
 }
 
-int wire::ReadReg(unsigned char reg, void *data, int length, bool resterted) {
-  if (resterted == true) {
+int wire::ReadReg(unsigned char reg, void *data, int length, bool repeated) {
+  if (repeated == true) {
     struct i2c_msg args[2];
     struct i2c_rdwr_ioctl_data msgset;
     args[0].addr = address;
