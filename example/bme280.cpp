@@ -53,22 +53,22 @@ int main(void) {
     return -1;
   }
 
-  bme280.WriteReg(0xF2, &ctrl_hum_reg);
-  bme280.WriteReg(0xF4, &ctrl_meas_reg);
-  bme280.WriteReg(0xF5, &config_reg);
+  bme280.WriteReg(0xF2, &ctrl_hum_reg, 1, true);
+  bme280.WriteReg(0xF4, &ctrl_meas_reg, 1, true);
+  bme280.WriteReg(0xF5, &config_reg, 1, true);
   readTrim();
 
   while (1) {
-    sleep(1);
-    readData();
+  sleep(1);
+  readData();
 
-    temp_cal = calibration_T(temp_raw);
-    press_cal = calibration_P(pres_raw);
-    hum_cal = calibration_H(hum_raw);
-    temp_act = (double)temp_cal / 100.0;
-    press_act = (double)press_cal / 100.0;
-    hum_act = (double)hum_cal / 1024.0;
-    printf("TEMP :%g°C,PRESS :%ghPa  HUM :%g%%\n", temp_act, press_act, hum_act);
+  temp_cal = calibration_T(temp_raw);
+  press_cal = calibration_P(pres_raw);
+  hum_cal = calibration_H(hum_raw);
+  temp_act = (double)temp_cal / 100.0;
+  press_act = (double)press_cal / 100.0;
+  hum_act = (double)hum_cal / 1024.0;
+  printf("TEMP :%g°C,PRESS :%ghPa  HUM :%g%%\n", temp_act, press_act, hum_act);
   }
   bme280.Close();
   return 0;
@@ -76,14 +76,11 @@ int main(void) {
 
 void readTrim() {
   unsigned char data[32], i = 0;
-  bme280.Write(0x88);
-  bme280.Read(&data[i], 24);
+  bme280.ReadReg(0x88, &data[i], 24, true);
   i += 24;
-  bme280.Write(0xA1);
-  bme280.Read(&data[i]);
+  bme280.ReadReg(0xA1, &data[i], 1, true);
   i += 1;
-  bme280.Write(0xE1);
-  bme280.Read(&data[i], 7);
+  bme280.ReadReg(0xE1, &data[i], 7, true);
   i += 7;
 
   dig_T1 = (data[1] << 8) | data[0];
