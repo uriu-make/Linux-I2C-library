@@ -59,16 +59,16 @@ int main(void) {
   readTrim();
 
   while (1) {
-  sleep(1);
-  readData();
+    sleep(1);
+    readData();
 
-  temp_cal = calibration_T(temp_raw);
-  press_cal = calibration_P(pres_raw);
-  hum_cal = calibration_H(hum_raw);
-  temp_act = (double)temp_cal / 100.0;
-  press_act = (double)press_cal / 100.0;
-  hum_act = (double)hum_cal / 1024.0;
-  printf("TEMP :%g°C,PRESS :%ghPa  HUM :%g%%\n", temp_act, press_act, hum_act);
+    temp_cal = calibration_T(temp_raw);
+    press_cal = calibration_P(pres_raw);
+    hum_cal = calibration_H(hum_raw);
+    temp_act = (double)temp_cal / 100.0;
+    press_act = (double)press_cal / 100.0;
+    hum_act = (double)hum_cal / 1024.0;
+    printf("TEMP :%g°C,PRESS :%ghPa  HUM :%g%%\n", temp_act, press_act, hum_act);
   }
   bme280.Close();
   return 0;
@@ -162,10 +162,7 @@ unsigned int calibration_H(int adc_H) {
   v_x1 = (t_fine - ((int)76800));
   v_x1 = (((((adc_H << 14) - (((int)dig_H4) << 20) - (((int)dig_H5) * v_x1)) + ((int)16384)) >> 15) *
           (((((((v_x1 * ((int)dig_H6)) >> 10) * (((v_x1 * ((int)dig_H3)) >> 11) + ((int)32768))) >> 10) +
-             ((int)2097152)) *
-                ((int)dig_H2) +
-            8192) >>
-           14));
+          ((int)2097152)) * ((int)dig_H2) + 8192) >> 14));
   v_x1 = (v_x1 - (((((v_x1 >> 15) * (v_x1 >> 15)) >> 7) * ((int)dig_H1)) >> 4));
   v_x1 = (v_x1 < 0 ? 0 : v_x1);
   v_x1 = (v_x1 > 419430400 ? 419430400 : v_x1);
