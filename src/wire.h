@@ -19,7 +19,12 @@ class wire {
   int fd;
   unsigned short address;
   const char *device;
-
+  struct t_data{
+	unsigned char read_write;
+	unsigned char command;
+	unsigned int size;
+	unsigned char *data;
+  };
  public:
   wire(void);
   wire(const char *device, char address);

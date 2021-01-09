@@ -49,8 +49,12 @@ int wire::WriteReg(unsigned char reg, const void *data, int length, bool repeate
     msgset.nmsgs = 2;
     return ioctl(fd, I2C_RDWR, &msgset) >= 0;
   } else {
-    write(fd, &reg, 1);
-    return write(fd, data, length);
+    struct t_data args;
+    args.read_write = 0;
+    args.command = reg;
+    args.size = length + 1;
+    args.data = (unsigned char *)data;
+    return ioctl(fd, I2C_SMBUS, &args);
   }
 }
 

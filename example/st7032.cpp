@@ -81,16 +81,16 @@ void init_oled() {
 }
 
 void writeCommand(char t_command) {
-  st7032.WriteReg(0x00, &t_command);
+  st7032.WriteReg(0x00, &t_command, 1);
 }
 
 void writeData(char DisplayAddress, char t_data) {
   writeCommand(0x80 + DisplayAddress);
-  st7032.WriteReg(0x40, &t_data);
+  st7032.WriteReg(0x40, &t_data, 1);
 }
 
 void writeData(const char *t_data) {
   for (int i = 0; i < strlen(t_data); i++) {
-    st7032.WriteReg(0x40, &t_data[i]);
+    st7032.WriteReg(0x40, &t_data[i], 1);
   }
 }
