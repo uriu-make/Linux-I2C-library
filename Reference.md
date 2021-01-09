@@ -21,15 +21,14 @@ Data sending.
 **data** :Pointer to the data to be sent.\
 **length** :Size of the data to be sent (bytes). Default is 1 byte.Can be omitted.
 ```
-int wire::WriteReg(const char reg, const void *data, int length = 1, bool repeated = false);
+int wire::WriteReg(const char reg, const void *data, int length = 1);
 ```
 Send data by specifying a register.
 
 **reg** :Register to be accessed\
 **data** :Pointer to the data to be sent.\
 **length** :Size of the data to be sent (bytes). Default is 1 byte.Can be omitted.\
-"length" does not include the number of bytes in the "reg"\
-**repeated** :Select whether to perform repeated start condition.  Valid with true.
+"length" does not include the number of bytes in the "reg"
 ```
 int wire::Read(void *data, const int length = 1);
 ```

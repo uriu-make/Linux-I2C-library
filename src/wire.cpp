@@ -33,29 +33,13 @@ int wire::Write(const void *data, int length) {
   return write(fd, data, length);
 }
 
-int wire::WriteReg(unsigned char reg, const void *data, int length, bool repeated) {
-  if (repeated == true) {
-    struct i2c_msg args[2];
-    struct i2c_rdwr_ioctl_data msgset;
-    args[0].addr = address;
-    args[0].flags = 0;
-    args[0].len = 1;
-    args[0].buf = &reg;
-    args[1].addr = address;
-    args[1].flags = 0;
-    args[1].len = length;
-    args[1].buf = (unsigned char *)data;
-    msgset.msgs = args;
-    msgset.nmsgs = 2;
-    return ioctl(fd, I2C_RDWR, &msgset) >= 0;
-  } else {
-    struct t_data args;
-    args.read_write = 0;
-    args.command = reg;
-    args.size = length + 1;
-    args.data = (unsigned char *)data;
-    return ioctl(fd, I2C_SMBUS, &args);
-  }
+int wire::WriteReg(unsigned char reg, const void *data, int length) {
+  struct t_data args;
+  args.read_write = 0;
+  args.command = reg;
+  args.size = length + 1;
+  args.data = (unsigned char *)data;
+  return ioctl(fd, I2C_SMBUS, &args);
 }
 
 int wire::Read(void *data, int length) {

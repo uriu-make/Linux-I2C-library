@@ -34,7 +34,7 @@ class wire {
   int Write(const int data, int length = 1);
   int Write(const void *data, int length = 1);
   /*"length" does not include the number of bytes in the "reg".*/
-  int WriteReg(unsigned char reg, const void *data, int length, bool repeated = false);
+  int WriteReg(unsigned char reg, const void *data, int length);
 
   int Read(void *data, const int length = 1);
   /*"length" does not include the number of bytes in the "reg".*/
