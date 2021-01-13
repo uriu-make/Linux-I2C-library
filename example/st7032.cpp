@@ -14,22 +14,19 @@ Type at the terminal.
 #include <wire.h>
 
 // #define SIZE 8 //8x2
-#define SIZE 16 //16x2
+#define SIZE 16 // 16x2
 
-char DisplayON = 0x0c,
-     ClearDisplay = 0x01,
-     ReturnHome = 0x02;
+char DisplayON = 0x0c, ClearDisplay = 0x01, ReturnHome = 0x02;
 
 void writeData(const char *t_data);
-void writeDataReg(char DisplayAddress, const char *t_data); //Write with register specified.
+void writeDataReg(char DisplayAddress, const char *t_data); // Write with register specified.
 void writeCommand(char t_command);
 void contrast_max();
 void init_oled();
 wire st7032(I2C1, 0x3c);
 
 int main(int argc, char *argv[]) {
-  if (st7032.Setup() < 0)
-    return -1;
+  if (st7032.Setup() < 0) return -1;
   contrast_max();
   init_oled();
 
@@ -69,8 +66,7 @@ int main(int argc, char *argv[]) {
 
 void contrast_max() {
   char data[] = {0x2A, 0x79, 0x81, 0xFF, 0x78, 0x28};
-  for (int i = 0; i < 6; i++)
-    writeCommand(data[i]);
+  for (int i = 0; i < 6; i++) writeCommand(data[i]);
 }
 
 void init_oled() {
