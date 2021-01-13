@@ -1,5 +1,5 @@
-# Linux-basic-I2C
-Basic Linux i2c library for C++.
+# Linux-I2C-library
+Linux i2c library for C++.
 
 To insrall library:
 ```sh
