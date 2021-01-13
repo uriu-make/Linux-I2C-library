@@ -60,7 +60,7 @@ int wire::ReadReg(unsigned char reg, void *data, int length, bool repeated) {
     args[1].buf = (unsigned char *)data;
     msgset.msgs = args;
     msgset.nmsgs = 2;
-    return ioctl(fd, I2C_RDWR, &msgset) >= 0;
+    return ioctl(fd, I2C_RDWR, &msgset);
   } else {
     write(fd, &reg, 1);
     return read(fd, data, length);
