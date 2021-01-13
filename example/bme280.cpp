@@ -32,13 +32,13 @@ unsigned int calibration_P(int adc_P);
 unsigned int calibration_H(int adc_H);
 
 int main(void) {
-  unsigned char osrs_t = 1;   //Temperature oversampling x 1
-  unsigned char osrs_p = 1;   //Pressure oversampling x 1
-  unsigned char osrs_h = 1;   //Humidity oversampling x 1
-  unsigned char mode = 3;     //Normal mode
-  unsigned char t_sb = 5;     //Tstandby 1000ms
-  unsigned char filter = 2;   //Filter off
-  unsigned char spi3w_en = 0; //3-wire SPI Disable
+  unsigned char osrs_t = 1;    // Temperature oversampling x 1
+  unsigned char osrs_p = 1;    // Pressure oversampling x 1
+  unsigned char osrs_h = 1;    // Humidity oversampling x 1
+  unsigned char mode = 3;      // Normal mode
+  unsigned char t_sb = 5;      // Tstandby 1000ms
+  unsigned char filter = 2;    // Filter off
+  unsigned char spi3w_en = 0;  // 3-wire SPI Disable
 
   unsigned char ctrl_meas_reg = (osrs_t << 5) | (osrs_p << 2) | mode;
   unsigned char config_reg = (t_sb << 5) | (filter << 2) | spi3w_en;
@@ -67,7 +67,8 @@ int main(void) {
     temp_act = (double)temp_cal / 100.0;
     press_act = (double)press_cal / 100.0;
     hum_act = (double)hum_cal / 1024.0;
-    printf("TEMP :%g°C,PRESS :%ghPa  HUM :%g%%\n", temp_act, press_act, hum_act);
+    printf("TEMP :%g°C,PRESS :%ghPa  HUM :%g%%\n", temp_act, press_act,
+           hum_act);
   }
   bme280.Close();
   return 0;
@@ -124,7 +125,10 @@ void readData() {
 int calibration_T(int adc_T) {
   int var1, var2, T;
   var1 = ((((adc_T >> 3) - ((int)dig_T1 << 1))) * ((int)dig_T2)) >> 11;
-  var2 = (((((adc_T >> 4) - ((int)dig_T1)) * ((adc_T >> 4) - ((int)dig_T1))) >> 12) * ((int)dig_T3)) >> 14;
+  var2 = (((((adc_T >> 4) - ((int)dig_T1)) * ((adc_T >> 4) - ((int)dig_T1))) >>
+           12) *
+          ((int)dig_T3)) >>
+         14;
 
   t_fine = var1 + var2;
   T = (t_fine * 5 + 128) >> 8;
@@ -138,7 +142,9 @@ unsigned int calibration_P(int adc_P) {
   var2 = (((var1 >> 2) * (var1 >> 2)) >> 11) * ((int)dig_P6);
   var2 = var2 + ((var1 * ((int)dig_P5)) << 1);
   var2 = (var2 >> 2) + (((int)dig_P4) << 16);
-  var1 = (((dig_P3 * (((var1 >> 2) * (var1 >> 2)) >> 13)) >> 3) + ((((int)dig_P2) * var1) >> 1)) >> 18;
+  var1 = (((dig_P3 * (((var1 >> 2) * (var1 >> 2)) >> 13)) >> 3) +
+          ((((int)dig_P2) * var1) >> 1)) >>
+         18;
   var1 = ((((32768 + var1)) * ((int)dig_P1)) >> 15);
   if (var1 == 0) {
     return 0;
@@ -159,9 +165,16 @@ unsigned int calibration_H(int adc_H) {
   int v_x1;
 
   v_x1 = (t_fine - ((int)76800));
-  v_x1 = (((((adc_H << 14) - (((int)dig_H4) << 20) - (((int)dig_H5) * v_x1)) + ((int)16384)) >> 15) *
-          (((((((v_x1 * ((int)dig_H6)) >> 10) * (((v_x1 * ((int)dig_H3)) >> 11) + ((int)32768))) >> 10) + 
-          ((int)2097152)) * ((int)dig_H2) + 8192) >> 14));
+  v_x1 = (((((adc_H << 14) - (((int)dig_H4) << 20) - (((int)dig_H5) * v_x1)) +
+            ((int)16384)) >>
+           15) *
+          (((((((v_x1 * ((int)dig_H6)) >> 10) *
+               (((v_x1 * ((int)dig_H3)) >> 11) + ((int)32768))) >>
+              10) +
+             ((int)2097152)) *
+                ((int)dig_H2) +
+            8192) >>
+           14));
   v_x1 = (v_x1 - (((((v_x1 >> 15) * (v_x1 >> 15)) >> 7) * ((int)dig_H1)) >> 4));
   v_x1 = (v_x1 < 0 ? 0 : v_x1);
   v_x1 = (v_x1 > 419430400 ? 419430400 : v_x1);
