@@ -1,6 +1,5 @@
 # Linux-I2C-library
-Linux i2c library for C++.
-
+I2C library of C++ for linux.
 To insrall library:
 ```sh
 make install
