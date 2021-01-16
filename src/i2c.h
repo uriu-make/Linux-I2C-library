@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
-#ifndef I2C_G_INCLUDE
+#ifndef I2C_H_INCLUDE
 #define I2C_H_INCLUDE
 #define I2C0 "/dev/i2c-0"
 #define I2C1 "/dev/i2c-1"
