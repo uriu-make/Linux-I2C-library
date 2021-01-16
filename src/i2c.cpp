@@ -1,13 +1,13 @@
-#include "wire.h"
+#include "i2c.h"
 
-wire::wire(void) {}
+i2c::i2c(void) {}
 
-wire::wire(const char *device, char address) {
+i2c::i2c(const char *device, char address) {
   this->device = device;
   this->address = address;
 }
 
-int wire::Setup(void) {
+int i2c::Setup(void) {
   fd = open(device, O_RDWR);
   if (ioctl(fd, I2C_SLAVE, address) < 0)
     return -1;
@@ -15,7 +15,7 @@ int wire::Setup(void) {
     return fd;
 }
 
-int wire::Setup(const char *device, char address) {
+int i2c::Setup(const char *device, char address) {
   this->device = device;
   this->address = address;
   fd = open(device, O_RDWR);
@@ -25,15 +25,15 @@ int wire::Setup(const char *device, char address) {
     return fd;
 }
 
-int wire::Write(const int data, int length) {
+int i2c::Write(const int data, int length) {
   return write(fd, &data, length);
 }
 
-int wire::Write(const void *data, int length) {
+int i2c::Write(const void *data, int length) {
   return write(fd, data, length);
 }
 
-int wire::WriteReg(unsigned char reg, const void *data, int length) {
+int i2c::WriteReg(unsigned char reg, const void *data, int length) {
   struct t_data args;
   args.read_write = 0;
   args.command = reg;
@@ -42,11 +42,11 @@ int wire::WriteReg(unsigned char reg, const void *data, int length) {
   return ioctl(fd, I2C_SMBUS, &args);
 }
 
-int wire::Read(void *data, int length) {
+int i2c::Read(void *data, int length) {
   return read(fd, data, length);
 }
 
-int wire::ReadReg(unsigned char reg, void *data, int length, bool repeated) {
+int i2c::ReadReg(unsigned char reg, void *data, int length, bool repeated) {
   if (repeated == true) {
     struct i2c_msg args[2];
     struct i2c_rdwr_ioctl_data msgset;
@@ -67,6 +67,6 @@ int wire::ReadReg(unsigned char reg, void *data, int length, bool repeated) {
   }
 }
 
-int wire::Close(void) {
+int i2c::Close(void) {
   return close(fd);
 }

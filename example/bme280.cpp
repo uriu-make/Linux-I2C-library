@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include <wire.h>
+#include <i2c.h>
 
-wire bme280(I2C1, 0x77);
+i2c bme280(I2C1, 0x77);
 
 unsigned int hum_raw, temp_raw, pres_raw;
 int t_fine;

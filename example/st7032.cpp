@@ -11,7 +11,7 @@ Type at the terminal.
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-#include <wire.h>
+#include <i2c.h>
 
 // #define SIZE 8 //8x2
 #define SIZE 16 // 16x2
@@ -23,7 +23,7 @@ void writeDataReg(char DisplayAddress, const char *t_data); // Write with regist
 void writeCommand(char t_command);
 void contrast_max();
 void init_oled();
-wire st7032(I2C1, 0x3c);
+i2c st7032(I2C1, 0x3c);
 
 int main(int argc, char *argv[]) {
   if (st7032.Setup() < 0) return -1;
