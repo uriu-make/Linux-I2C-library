@@ -19,7 +19,7 @@ int i2c::Write(const void *data, int length = 1);
 Data sending.
 
 **data** :Pointer to the data to be sent.\
-**length** :Size of the data to be sent (bytes). Default is 1 byte.Can be omitted.
+**length** :Size of the data to be sent (bytes). Default is 1 byte.
 ```
 int i2c::WriteReg(const char reg, const void *data, int length = 1);
 ```
@@ -27,7 +27,7 @@ Send data by specifying a register.
 
 **reg** :Register to be accessed\
 **data** :Pointer to the data to be sent.\
-**length** :Size of the data to be sent (bytes). Default is 1 byte.Can be omitted.\
+**length** :Size of the data to be sent (bytes). Default is 1 byte.\
 "length" does not include the number of bytes in the "reg"
 ```
 int i2c::Read(void *data, const int length = 1);
@@ -35,7 +35,7 @@ int i2c::Read(void *data, const int length = 1);
 Read out the data.
 
 **data** :A pointer to a variable that stores the data to read.\
-**length** :Size of the data to be read (bytes). Default is 1 byte.Can be omitted.
+**length** :Size of the data to be read (bytes). Default is 1 byte.
 ```
 int i2c::ReadReg(const char reg, void *data, const int length = 1, bool repeated = false);
 ```
@@ -43,7 +43,7 @@ Read data by specifying a register.
 
 **reg** :Register to be accessed\
 **data** :A pointer to a variable that stores the data to read.\
-**length** :Size of the data to be read (bytes). Default is 1 byte.Can be omitted.\
+**length** :Size of the data to be read (bytes). Default is 1 byte.\
 "length" does not include the number of bytes in the "reg"\
 **repeated** :Select whether to perform repeated start condition.  Valid with true.
 ```
