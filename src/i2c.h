@@ -19,19 +19,12 @@ class i2c {
   int fd;
   unsigned short address;
   const char *device;
-  struct t_data{
-	unsigned char read_write;
-	unsigned char command;
-	unsigned int size;
-	unsigned char *data;
-  };
  public:
   i2c(void);
   i2c(const char *device, char address);
   int Setup(void);
   int Setup(const char *device, char address);
 
-  int Write(const int data, int length = 1);
   int Write(const void *data, int length = 1);
   /*"length" does not include the number of bytes in the "reg".*/
   int WriteReg(unsigned char reg, const void *data, int length);
