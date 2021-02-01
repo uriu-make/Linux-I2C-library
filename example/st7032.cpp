@@ -14,12 +14,12 @@ Type at the terminal.
 #include <i2c.h>
 
 // #define SIZE 8 //8x2
-#define SIZE 16 // 16x2
+#define SIZE 16  //16x2
 
 char DisplayON = 0x0c, ClearDisplay = 0x01, ReturnHome = 0x02;
 
 void writeData(const char *t_data);
-void writeDataReg(char DisplayAddress, const char *t_data); // Write with register specified.
+void writeDataReg(char DisplayAddress, const char *t_data);  // Write with register specified.
 void writeCommand(char t_command);
 void contrast_max();
 void init_oled();

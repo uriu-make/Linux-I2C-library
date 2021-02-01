@@ -19,6 +19,7 @@ class i2c {
   int fd;
   unsigned short address;
   const char *device;
+
  public:
   i2c(void);
   i2c(const char *device, char address);
