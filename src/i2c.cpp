@@ -33,7 +33,8 @@ int i2c::WriteReg(unsigned char reg, const void *data, int length) {
   unsigned char t_data[length + 1];
   unsigned char *d = (unsigned char *)data;
   t_data[0] = reg;
-  for (int i = 0; i < length; i++) t_data[i + 1] = d[i];
+  for (int i = 0; i < length; i++)
+    t_data[i + 1] = d[i];
   struct i2c_msg args;
   struct i2c_rdwr_ioctl_data msgset;
   args.addr = address;
