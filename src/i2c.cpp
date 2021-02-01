@@ -25,7 +25,9 @@ int i2c::Setup(const char *device, char address) {
     return fd;
 }
 
-int i2c::Write(const void *data, int length) { return write(fd, data, length); }
+int i2c::Write(const void *data, int length) {
+  return write(fd, data, length);
+}
 
 int i2c::WriteReg(unsigned char reg, const void *data, int length) {
   unsigned char t_data[length + 1];
@@ -43,7 +45,9 @@ int i2c::WriteReg(unsigned char reg, const void *data, int length) {
   return ioctl(fd, I2C_RDWR, &msgset);
 }
 
-int i2c::Read(void *data, int length) { return read(fd, data, length); }
+int i2c::Read(void *data, int length) {
+  return read(fd, data, length);
+}
 
 int i2c::ReadReg(unsigned char reg, void *data, int length, bool repeated) {
   if (repeated == true) {
@@ -66,4 +70,6 @@ int i2c::ReadReg(unsigned char reg, void *data, int length, bool repeated) {
   }
 }
 
-int i2c::Close(void) { return close(fd); }
+int i2c::Close(void) {
+  return close(fd);
+}
