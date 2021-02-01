@@ -36,7 +36,7 @@ int i2c::WriteReg(unsigned char reg, const void *data, int length) {
   struct i2c_rdwr_ioctl_data msgset;
   args.addr = address;
   args.flags = 0;
-  args.len = 1;
+  args.len = length + 1;
   args.buf = t_data;
   msgset.msgs = &args;
   msgset.nmsgs = 2;
