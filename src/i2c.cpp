@@ -25,21 +25,24 @@ int i2c::Setup(const char *device, char address) {
     return fd;
 }
 
-int i2c::Write(const int data, int length) {
-  return write(fd, &data, length);
-}
-
 int i2c::Write(const void *data, int length) {
   return write(fd, data, length);
 }
 
 int i2c::WriteReg(unsigned char reg, const void *data, int length) {
-  struct t_data args;
-  args.read_write = 0;
-  args.command = reg;
-  args.size = length + 1;
-  args.data = (unsigned char *)data;
-  return ioctl(fd, I2C_SMBUS, &args);
+  unsigned char t_data[length + 1];
+  unsigned char *d = (unsigned char *)data;
+  t_data[0] = reg;
+  for (int i = 0; i < length; i++) t_data[i + 1] = d[i];
+  struct i2c_msg args;
+  struct i2c_rdwr_ioctl_data msgset;
+  args.addr = address;
+  args.flags = 0;
+  args.len = length + 1;
+  args.buf = t_data;
+  msgset.msgs = &args;
+  msgset.nmsgs = 2;
+  return ioctl(fd, I2C_RDWR, &msgset);
 }
 
 int i2c::Read(void *data, int length) {
