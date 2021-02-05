@@ -35,15 +35,7 @@ int i2c::WriteReg(unsigned char reg, const void *data, int length) {
   t_data[0] = reg;
   for (int i = 0; i < length; i++)
     t_data[i + 1] = d[i];
-  struct i2c_msg args;
-  struct i2c_rdwr_ioctl_data msgset;
-  args.addr = address;
-  args.flags = 0;
-  args.len = length + 1;
-  args.buf = t_data;
-  msgset.msgs = &args;
-  msgset.nmsgs = 2;
-  return ioctl(fd, I2C_RDWR, &msgset);
+  return write(fd, t_data, length + 1);
 }
 
 int i2c::Read(void *data, int length) {
