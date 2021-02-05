@@ -14,7 +14,7 @@ Open device.
 
 If defined in the constructor, the argument can be omitted.
 ```
-int i2c::Write(const void *data, int length);
+int i2c::Write(void *data, const int length = 1);
 ```
 Data sending.
 
@@ -30,7 +30,7 @@ Send data by specifying a register.
 **length** :Size of the data to be sent (bytes).\
 "length" does not include the number of bytes in the "reg"
 ```
-int i2c::Read(void *data, const int length);
+int i2c::Read(void *data, const int length = 1);
 ```
 Read out the data.
 
