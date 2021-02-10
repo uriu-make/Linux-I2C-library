@@ -37,15 +37,14 @@ Read out the data.
 **data** :A pointer to a variable that stores the data to read.\
 **length** :Size of the data to be read (bytes).
 ```
-int i2c::ReadReg(const char reg, void *data, const int length, bool repeated = false);
+int i2c::ReadReg(const char reg, void *data, const int length);
 ```
 Read data by specifying a register.
 
 **reg** :Register to be accessed\
 **data** :A pointer to a variable that stores the data to read.\
 **length** :Size of the data to be read (bytes).\
-"length" does not include the number of bytes in the "reg"\
-**repeated** :Select whether to perform repeated start condition.  Valid with true.
+"length" does not include the number of bytes in the "reg"
 ```
 int i2c::Close(void);
 ```

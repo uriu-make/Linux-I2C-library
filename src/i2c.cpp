@@ -42,8 +42,7 @@ int i2c::Read(void *data, int length) {
   return read(fd, data, length);
 }
 
-int i2c::ReadReg(unsigned char reg, void *data, int length, bool repeated) {
-  if (repeated == true) {
+int i2c::ReadReg(unsigned char reg, void *data, int length) {
     struct i2c_msg args[2];
     struct i2c_rdwr_ioctl_data msgset;
     args[0].addr = address;
@@ -57,10 +56,6 @@ int i2c::ReadReg(unsigned char reg, void *data, int length, bool repeated) {
     msgset.msgs = args;
     msgset.nmsgs = 2;
     return ioctl(fd, I2C_RDWR, &msgset);
-  } else {
-    write(fd, &reg, 1);
-    return read(fd, data, length);
-  }
 }
 
 int i2c::Close(void) {

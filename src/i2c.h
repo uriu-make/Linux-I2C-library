@@ -32,7 +32,7 @@ class i2c {
 
   int Read(void *data, const int length = 1);
   /*"length" does not include the number of bytes in the "reg".*/
-  int ReadReg(unsigned char reg, void *data, const int length, bool repeated = false);
+  int ReadReg(unsigned char reg, void *data, const int length);
 
   int Close(void);
 };
