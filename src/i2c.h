@@ -28,11 +28,11 @@ class i2c {
 
   int Write(const void *data, int length = 1);
   /*"length" does not include the number of bytes in the "reg".*/
-  int WriteReg(unsigned char reg, const void *data, int length);
+  int WriteReg(unsigned char reg, const void *data, int length = 1);
 
   int Read(void *data, const int length = 1);
   /*"length" does not include the number of bytes in the "reg".*/
-  int ReadReg(unsigned char reg, void *data, const int length);
+  int ReadReg(unsigned char reg, void *data, const int length = 1);
 
   int Close(void);
 };
