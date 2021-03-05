@@ -10,3 +10,4 @@ bme280:
 	gcc example/bme280.cpp -o example/bme280.o -li2c
 
 all: install st7032 bme280
+examples: st7032 bme280
