@@ -21,10 +21,8 @@ class i2c {
   const char *device;
 
  public:
-  i2c(void);
   i2c(const char *device, char address);
   int Setup(void);
-  int Setup(const char *device, char address);
 
   int Write(const void *data, int length = 1);
   /*"length" does not include the number of bytes in the "reg".*/

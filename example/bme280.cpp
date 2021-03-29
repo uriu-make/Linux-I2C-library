@@ -76,11 +76,11 @@ int main(void) {
 
 void readTrim() {
   unsigned char data[32], i = 0;
-  bme280.ReadReg(0x88, &data[i], 24, true);
+  bme280.ReadReg(0x88, &data[i], 24);
   i += 24;
-  bme280.ReadReg(0xA1, &data[i], 1, true);
+  bme280.ReadReg(0xA1, &data[i], 1);
   i += 1;
-  bme280.ReadReg(0xE1, &data[i], 7, true);
+  bme280.ReadReg(0xE1, &data[i], 7);
   i += 7;
 
   dig_T1 = (data[1] << 8) | data[0];
@@ -106,7 +106,7 @@ void readTrim() {
 void readData() {
   int i = 0;
   unsigned char data[8];
-  bme280.ReadReg(0xF7, &data, 8, true);
+  bme280.ReadReg(0xF7, &data, 8);
   for (int i = 0; i < 8; i++) {
     data[i] = data[i] & 0xFF;
   }

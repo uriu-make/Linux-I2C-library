@@ -1,7 +1,5 @@
 #include "i2c.h"
 
-i2c::i2c(void) {}
-
 i2c::i2c(const char *device, char address) {
   this->device = device;
   this->address = address;
@@ -10,16 +8,6 @@ i2c::i2c(const char *device, char address) {
 int i2c::Setup(void) {
   fd = open(device, O_RDWR);
   if (ioctl(fd, I2C_SLAVE, address) < 0)
-    return -1;
-  else
-    return fd;
-}
-
-int i2c::Setup(const char *device, char address) {
-  this->device = device;
-  this->address = address;
-  fd = open(device, O_RDWR);
-  if (ioctl(fd, I2C_SLAVE, this->address) < 0)
     return -1;
   else
     return fd;
