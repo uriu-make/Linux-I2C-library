@@ -23,7 +23,8 @@ void writeDataReg(char DisplayAddress, const char *t_data);  // Write with regis
 void writeCommand(char t_command);
 void contrast_max();
 void init_oled();
-i2c st7032(I2C1, 0x3c);
+
+i2c st7032("/dev/i2c-1", 0x3c);
 
 int main(int argc, char *argv[]) {
   if (st7032.Setup() < 0) return -1;
