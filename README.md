@@ -13,6 +13,10 @@ To build example/bme280.cpp:
 ```sh
 make bme280
 ```
+Build the library and examples:
+```sh
+make examples
+```
 --------
 ## Reference
 [Reference](Reference.md)
