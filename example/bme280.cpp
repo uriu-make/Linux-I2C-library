@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <i2c.h>
+#include <i2clib.h>
 
 i2c bme280(I2C1, 0x77);
 

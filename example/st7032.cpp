@@ -11,7 +11,7 @@ Type at the terminal.
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-#include <i2c.h>
+#include <i2clib.h>
 
 // #define SIZE 8 //8x2
 #define SIZE 16  //16x2

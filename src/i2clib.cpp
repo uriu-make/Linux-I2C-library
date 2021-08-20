@@ -1,4 +1,4 @@
-#include "i2c.h"
+#include "i2clib.h"
 
 i2c::i2c(const char *device, char address) {
   this->device = device;
