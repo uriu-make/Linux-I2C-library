@@ -4,15 +4,13 @@ i2c::i2c(const char *device, char address);
 ```
 Creating an object.
 
-**device** :Name of the I2C to be used (example "/dev/I2C-1").Can be omitted.\
-**address** :I2C device address.Can be omitted.\
+**device** :Name of the I2C to be used (example "/dev/I2C-1").\
+**address** :I2C device address.\
 /dev/i2c-0~/dev/i2c-6 are defined as I2C0~I2C6
 ```
-int i2c::Setup(const char *device, char address);
+int Setup(void);
 ```
 Open device.
-
-If defined in the constructor, the argument can be omitted.
 ```
 int i2c::Write(void *data, const int length = 1);
 ```
